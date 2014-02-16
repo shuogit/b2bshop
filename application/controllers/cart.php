@@ -34,12 +34,9 @@ class Cart extends Home_Controller{
 			}
 		}
 		if ($this->cart->insert($data)) {
-			# ok
-			// echo 'ok';
-			redirect('cart/show');
+			return 'ok';
 		} else {
-			# error
-			echo 'error';
+			return 'error';
 		}
 	}
 	#删除购物车信息

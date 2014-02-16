@@ -481,7 +481,7 @@
 			var goods_nums = form.find("input[name='goods_nums']").attr('value');
 			console.log(goods_name+goods_nums+goods_id+shop_price);
 				$.ajax({
-					url: "cart/add",
+					url: "index.php/cart/add",
 					method: "post",   
 					data:{
 						'goods_name': goods_name,
@@ -490,10 +490,10 @@
 						'goods_nums':goods_nums,
 					},
 					success: function(data) {
-						alert(data);
+						console.log('success');
 					},
 					error: function(request) {
-						alert("Connection error");
+						console.log('error');
 					}
 				});
 			});

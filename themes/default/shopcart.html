@@ -27,10 +27,11 @@
   <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="img/favicon.png">
   
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" src="<?php echo base_url('themes/default/js/jquery.min.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('themes/default/js/bootstrap.min.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('themes/default/js/scripts.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('themes/default/js/messenger.min.js');?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('themes/default/js/messenger-theme-flat.js');?>"></script>
     function check_all(obj,cName)
     {
         var checkboxs = document.getElementsByName(cName);
@@ -125,101 +126,27 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="info">巧克力
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-default">+</button>
-                                <input type="text" class="form-control" style="width:50px">
-                                <button type="button" class="btn btn-default">-</button>
-                            </td>
-                            <td>
-                                160
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger">删除</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="info">巧克力
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-default">+</button>
-                                <input type="text" class="form-control" style="width:50px">
-                                <button type="button" class="btn btn-default">-</button>
-                            </td>
-                            <td>
-                                160
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger">删除</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="info">巧克力
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-default">+</button>
-                                <input type="text" class="form-control" style="width:50px">
-                                <button type="button" class="btn btn-default">-</button>
-                            </td>
-                            <td>
-                                160
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger">删除</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="info">巧克力
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-default">+</button>
-                                <input type="text" class="form-control" style="width:50px">
-                                <button type="button" class="btn btn-default">-</button>
-                            </td>
-                            <td>
-                                160
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger">删除</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="info">巧克力
-                            </td>
-                            <td>
-                                20
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-default">+</button>
-                                <input type="text" class="form-control" style="width:50px">
-                                <button type="button" class="btn btn-default">-</button>
-                            </td>
-                            <td>
-                                160
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger">删除</button>
-                            </td>
-                        </tr>
+                        <?php foreach ($carts as $v) :?>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="info"><?php echo $v['name'];?>
+                                </td>
+                                <td>
+                                    <?php echo $v['price'];?>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-default subtract">-</button>
+                                    <input type="text" class="form-control" style="width:50px" value="1">
+                                    <button type="button" class="btn btn-default plus">+</button>
+                                </td>
+                                <td>
+                                    <span class = "subtotal" ><?php echo $v['subtotal'];?></span>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger">删除</button>
+                                </td>
+                            </tr>
+                        <?php endforeach;?>
                     </tbody>
                 </table>
                 </form>
@@ -435,5 +362,16 @@
                 </div>
             </div>
     </div>
+    <script type="text/javascript">
+            $(".plus").click(function(){
+                $(this).prev().val(parseInt($(this).prev().val())+1);
+                $(this).parent().next().find("span.subtotal").html()
+            })
+            $(".subtract").click(function(){
+                if($(this).next().val()>1){
+                    $(this).next().val(parseInt($(this).next().val())-1);
+                }
+            })
+    </script>
 </body>
 </html>
