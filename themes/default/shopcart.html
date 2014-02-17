@@ -132,7 +132,7 @@
                                     <input type="checkbox" name="info"><?php echo $v['name'];?>
                                 </td>
                                 <td>
-                                    <?php echo $v['price'];?>
+                                   <span class = "price"><?php echo $v['price'];?></span> 
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-default subtract">-</button>
@@ -365,7 +365,9 @@
     <script type="text/javascript">
             $(".plus").click(function(){
                 $(this).prev().val(parseInt($(this).prev().val())+1);
-                $(this).parent().next().find("span.subtotal").html()
+                var qty = $(this).prev().val();
+                var price = $(this).parent().parent().find("span.price").html();
+                $(this).parent().next().find("span.subtotal").html(qty*price);
             })
             $(".subtract").click(function(){
                 if($(this).next().val()>1){
